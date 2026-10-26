@@ -1,0 +1,1552 @@
+:root {
+  color-scheme: dark;
+
+  --hd-bg: #080b14;
+  --hd-surface: #101625;
+  --hd-surface-2: #131b2c;
+  --hd-surface-hover: #172238;
+  --hd-border: rgba(148, 163, 184, 0.15);
+  --hd-border-strong: rgba(148, 163, 184, 0.28);
+
+  --hd-primary: #3b82f6;
+  --hd-secondary: #8b5cf6;
+  --hd-cyan: #06b6d4;
+
+  --hd-text: #e8edf6;
+  --hd-muted: #94a3b8;
+  --hd-muted-2: #8496b0;
+
+  --hd-radius-lg: 22px;
+  --hd-radius-md: 16px;
+  --hd-radius-sm: 12px;
+
+  --hd-sidebar-width: 260px;
+
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--hd-bg);
+  color: var(--hd-text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--hd-bg);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Foco acessível para teclado e controle remoto. */
+:focus-visible {
+  outline: 3px solid var(--hd-primary);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* ---------- Shell ---------- */
+
+.homedeck-shell {
+  display: flex;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 60% 40% at 78% -5%, rgba(139, 92, 246, 0.1), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 0%, rgba(59, 130, 246, 0.07), transparent 60%),
+    var(--hd-bg);
+}
+
+.homedeck-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+
+  width: var(--hd-sidebar-width);
+  padding: 30px 18px 24px;
+
+  background: linear-gradient(180deg, rgba(11, 15, 26, 0.97), rgba(8, 11, 20, 0.97));
+  border-right: 1px solid var(--hd-border);
+}
+
+.homedeck-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 0 10px 44px;
+  padding: 0;
+}
+
+.homedeck-brand-logo {
+  display: block;
+  width: 168px;
+  height: auto;
+
+  /* Recorta a tagline embutida no PNG, mantendo apenas o wordmark. */
+  aspect-ratio: 2523 / 300;
+  object-fit: cover;
+  object-position: top;
+}
+
+.text-primary {
+  color: var(--hd-primary);
+}
+
+.homedeck-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.homedeck-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  min-height: 52px;
+  padding: 0 16px;
+
+  border: 1px solid transparent;
+  border-radius: var(--hd-radius-sm);
+
+  color: var(--hd-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  transition:
+    color 150ms ease,
+    background 150ms ease,
+    border-color 150ms ease;
+}
+
+.homedeck-nav-item>i {
+  font-size: 1.15rem;
+  width: 1.25rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.homedeck-nav-item:hover {
+  color: var(--hd-text);
+  background: rgba(59, 130, 246, 0.09);
+}
+
+.homedeck-nav-item.active {
+  color: #fff;
+  background: linear-gradient(100deg, rgba(59, 130, 246, 0.32), rgba(139, 92, 246, 0.2));
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.homedeck-sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  margin-top: auto;
+  padding: 16px 12px 0;
+
+  color: var(--hd-muted-2);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+.homedeck-sidebar-footer::after {
+  content: '';
+
+  width: 46px;
+  height: 3px;
+  margin-top: 14px;
+
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--hd-primary), var(--hd-secondary));
+}
+
+/* ---------- Main / topbar ---------- */
+
+.homedeck-main {
+  display: flex;
+  flex-direction: column;
+
+  width: calc(100% - var(--hd-sidebar-width));
+  min-height: 100vh;
+  margin-left: var(--hd-sidebar-width);
+}
+
+.homedeck-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  min-height: 84px;
+  padding: 16px 40px;
+}
+
+.homedeck-topbar-label {
+  color: var(--hd-muted-2);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.homedeck-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.homedeck-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.25;
+}
+
+.homedeck-clock strong {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.homedeck-clock span {
+  color: var(--hd-muted-2);
+  font-size: 0.74rem;
+}
+
+.homedeck-topbar-divider {
+  width: 1px;
+  height: 34px;
+  background: var(--hd-border);
+}
+
+.homedeck-icon-button {
+  display: grid;
+  place-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  color: var(--hd-muted);
+  font-size: 1.05rem;
+
+  border: 1px solid var(--hd-border);
+  border-radius: 50%;
+
+  background: rgba(19, 27, 44, 0.7);
+
+  transition: color 150ms ease, background 150ms ease, border-color 150ms ease;
+}
+
+.homedeck-icon-button:hover {
+  color: var(--hd-text);
+  background: var(--hd-surface-hover);
+  border-color: var(--hd-border-strong);
+}
+
+.homedeck-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 16px;
+
+  color: var(--hd-text);
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  border: 1px solid var(--hd-border);
+  border-radius: 999px;
+
+  background: rgba(8, 11, 20, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.homedeck-status-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.55);
+}
+
+.homedeck-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 8px 40px 64px;
+}
+
+/* ---------- Hero ---------- */
+
+.homedeck-hero {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 268px;
+  margin-bottom: 44px;
+  padding: clamp(28px, 3.4vw, 46px) clamp(28px, 4vw, 56px);
+
+  border: 1px solid var(--hd-border);
+  border-radius: var(--hd-radius-lg);
+
+  background:
+    radial-gradient(ellipse 70% 90% at 88% 118%, rgba(249, 115, 22, 0.16), transparent 62%),
+    radial-gradient(ellipse 60% 80% at 70% 100%, rgba(236, 72, 153, 0.14), transparent 60%),
+    radial-gradient(ellipse 90% 70% at 40% -20%, rgba(59, 130, 246, 0.22), transparent 65%),
+    linear-gradient(155deg, #131c33 0%, #101728 45%, #1a1430 100%);
+
+  box-shadow: 0 30px 70px -50px rgba(0, 0, 0, 0.9);
+}
+
+/* Silhueta de montanhas, ecoando a referência visual. */
+.homedeck-hero::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 52%;
+
+  background:
+    linear-gradient(to top, rgba(6, 9, 16, 0.92), transparent),
+    conic-gradient(from 130deg at 22% 100%, rgba(30, 41, 59, 0.85) 0 55deg, transparent 55deg),
+    conic-gradient(from 118deg at 62% 100%, rgba(15, 23, 42, 0.9) 0 62deg, transparent 62deg);
+
+  pointer-events: none;
+}
+
+.homedeck-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(8, 11, 20, 0.72) 0%, rgba(8, 11, 20, 0.18) 55%, transparent 80%);
+  pointer-events: none;
+}
+
+.homedeck-hero-body {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+}
+
+.homedeck-hero-welcome {
+  color: #aeb9cc;
+  font-size: clamp(1.15rem, 1.7vw, 1.6rem);
+  font-weight: 500;
+}
+
+.homedeck-hero-logo {
+  display: block;
+  width: clamp(240px, 26vw, 400px);
+  height: auto;
+  margin: 2px 0 18px -4px;
+
+  aspect-ratio: 2523 / 300;
+  object-fit: cover;
+  object-position: top;
+
+  filter: drop-shadow(0 12px 28px rgba(59, 130, 246, 0.25));
+}
+
+.homedeck-hero-tagline {
+  margin: 0;
+  max-width: 480px;
+  color: #b6c1d4;
+  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+  line-height: 1.75;
+}
+
+.homedeck-hero-status {
+  position: absolute;
+  right: clamp(24px, 3vw, 44px);
+  bottom: clamp(24px, 3vw, 40px);
+  z-index: 2;
+}
+
+/* ---------- Seções ---------- */
+
+.homedeck-home,
+.homedeck-category-page {
+  gap: 0;
+}
+
+.homedeck-section {
+  margin-bottom: 42px;
+}
+
+.homedeck-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 18px;
+}
+
+.homedeck-section-header h2 {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.homedeck-section-header>span {
+  color: var(--hd-muted-2);
+  font-size: 0.85rem;
+}
+
+.homedeck-section-link {
+  color: var(--hd-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border: 1px solid var(--hd-border);
+  border-radius: 999px;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.homedeck-section-link:hover {
+  color: var(--hd-text);
+  border-color: var(--hd-border-strong);
+}
+
+/* ---------- Rail de destaques ---------- */
+
+.homedeck-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(190px, 1fr);
+  gap: 18px;
+
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+
+.homedeck-rail::-webkit-scrollbar {
+  height: 8px;
+}
+
+.homedeck-rail::-webkit-scrollbar {
+  height: 6px;
+}
+
+.homedeck-rail::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.homedeck-rail::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.18);
+  border-radius: 999px;
+}
+
+.homedeck-rail::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.32);
+}
+
+.homedeck-rail-empty {
+  grid-auto-flow: column;
+  align-self: center;
+  color: var(--hd-muted-2);
+  font-size: 0.9rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.homedeck-featured-tile {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+
+  scroll-snap-align: start;
+  min-height: 218px;
+  padding: 20px;
+
+  text-align: left;
+  color: #fff;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+
+  cursor: pointer;
+
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.homedeck-featured-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 12%, rgba(255, 255, 255, 0.16), transparent 65%),
+    linear-gradient(to top, rgba(3, 6, 14, 0.82) 0%, rgba(3, 6, 14, 0.25) 45%, transparent 70%);
+  pointer-events: none;
+}
+
+.homedeck-featured-tile:hover {
+  transform: translateY(-5px) scale(1.012);
+  border-color: rgba(255, 255, 255, 0.34);
+}
+
+.homedeck-featured-logo {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding-bottom: 46px;
+}
+
+.homedeck-featured-logo img {
+  width: 60%;
+  max-height: 92px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
+}
+
+.homedeck-featured-info {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.homedeck-featured-info strong {
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+.homedeck-featured-info span {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.76rem;
+}
+
+/* ---------- Card adicionar ---------- */
+
+.homedeck-add-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  min-height: 218px;
+  padding: 20px;
+
+  color: var(--hd-muted);
+  text-align: center;
+
+  border: 1.5px dashed rgba(148, 163, 184, 0.3);
+  border-radius: 20px;
+  background: rgba(16, 22, 37, 0.4);
+
+  cursor: pointer;
+  transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+}
+
+.homedeck-add-card:hover {
+  color: var(--hd-text);
+  border-color: rgba(59, 130, 246, 0.6);
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.homedeck-add-card-plus {
+  display: grid;
+  place-items: center;
+
+  width: 54px;
+  height: 54px;
+
+  font-size: 1.3rem;
+
+  border: 1px solid var(--hd-border);
+  border-radius: 50%;
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.homedeck-add-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.homedeck-add-card-info strong {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.homedeck-add-card-info span {
+  color: var(--hd-muted-2);
+  font-size: 0.76rem;
+}
+
+/* ---------- Grade de categorias ---------- */
+
+.homedeck-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.homedeck-category-card {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 18px 40px 18px 18px;
+
+  text-align: left;
+  color: var(--hd-text);
+
+  border: 1px solid var(--hd-border);
+  border-radius: 18px;
+  background: linear-gradient(140deg, var(--hd-surface-2), var(--hd-surface));
+
+  cursor: pointer;
+  overflow: hidden;
+
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.homedeck-category-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 100% at 0% 50%, var(--hd-card-glow, transparent), transparent 62%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.homedeck-category-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--hd-card-accent, var(--hd-border-strong));
+}
+
+.homedeck-category-icon {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+
+  width: 46px;
+  height: 46px;
+
+  color: #fff;
+  font-size: 1.15rem;
+
+  border-radius: 14px;
+}
+
+.homedeck-category-info {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.homedeck-category-info strong {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.homedeck-category-info span {
+  color: var(--hd-muted-2);
+  font-size: 0.78rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.homedeck-category-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  color: var(--hd-muted-2);
+  font-size: 0.85rem;
+  z-index: 1;
+}
+
+.homedeck-category-add {
+  border-style: dashed;
+  border-color: rgba(148, 163, 184, 0.28);
+  background: transparent;
+}
+
+.homedeck-category-add .homedeck-category-icon {
+  background: rgba(148, 163, 184, 0.12) !important;
+  color: var(--hd-muted);
+}
+
+/* ---------- Chips de apps recentes ---------- */
+
+.homedeck-chip-rail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.homedeck-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+
+  width: 108px;
+  padding: 14px 8px 12px;
+
+  color: var(--hd-text);
+
+  border: 1px solid var(--hd-border);
+  border-radius: var(--hd-radius-md);
+  background: linear-gradient(160deg, var(--hd-surface-2), var(--hd-surface));
+
+  cursor: pointer;
+  transition: transform 150ms ease, border-color 150ms ease;
+}
+
+.homedeck-chip:hover {
+  transform: translateY(-3px);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.homedeck-chip>span {
+  max-width: 100%;
+
+  color: var(--hd-muted);
+  font-size: 0.74rem;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Ícone de app ---------- */
+
+.homedeck-app-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.homedeck-app-icon-image {
+  background: rgba(255, 255, 255, 0.92) !important;
+}
+
+.homedeck-app-icon-image img {
+  width: 62%;
+  height: 62%;
+  object-fit: contain;
+}
+
+/* ---------- Página de categoria ---------- */
+
+.homedeck-page-header {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  padding: 26px 28px;
+  margin-bottom: 26px;
+
+  border: 1px solid var(--hd-border);
+  border-radius: var(--hd-radius-lg);
+  background: linear-gradient(120deg, var(--hd-surface-2), rgba(16, 22, 37, 0.6));
+}
+
+.homedeck-page-icon {
+  display: grid;
+  place-items: center;
+
+  width: 62px;
+  height: 62px;
+
+  color: #fff;
+  font-size: 1.6rem;
+
+  border-radius: 18px;
+  flex-shrink: 0;
+}
+
+.homedeck-page-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.homedeck-page-title h1 {
+  margin: 0;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.homedeck-page-title p {
+  margin: 0;
+  color: var(--hd-muted);
+  font-size: 0.9rem;
+}
+
+.homedeck-page-count {
+  color: var(--hd-muted-2);
+  font-size: 0.78rem;
+}
+
+.homedeck-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-left: auto;
+  padding: 10px 16px;
+
+  color: var(--hd-muted);
+  font-size: 0.84rem;
+
+  border: 1px solid var(--hd-border);
+  border-radius: 999px;
+  background: rgba(8, 11, 20, 0.5);
+  white-space: nowrap;
+}
+
+.homedeck-back-link:hover {
+  color: var(--hd-text);
+  border-color: var(--hd-border-strong);
+}
+
+.homedeck-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.homedeck-search {
+  position: relative;
+  display: block;
+  flex: 1;
+  max-width: 420px;
+}
+
+.homedeck-search .p-input-icon-left>i,
+.homedeck-search>i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--hd-muted-2);
+  z-index: 2;
+}
+
+.homedeck-search input {
+  padding-left: 40px !important;
+  background: var(--hd-surface) !important;
+}
+
+.homedeck-add-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-left: auto;
+  padding: 12px 20px;
+
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 600;
+
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  border-radius: var(--hd-radius-sm);
+  background: linear-gradient(120deg, rgba(59, 130, 246, 0.28), rgba(139, 92, 246, 0.22));
+
+  cursor: pointer;
+  transition: filter 150ms ease, transform 150ms ease;
+}
+
+.homedeck-add-button:hover {
+  filter: brightness(1.18);
+  transform: translateY(-1px);
+}
+
+.homedeck-app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+  gap: 18px;
+}
+
+/* Tile vertical com menu de ações */
+
+.homedeck-app-tile {
+  position: relative;
+
+  border: 1px solid var(--hd-border);
+  border-radius: 18px;
+  background: linear-gradient(160deg, var(--hd-surface-2), var(--hd-surface));
+
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.homedeck-app-tile:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 22px 40px -30px rgba(59, 130, 246, 0.7);
+}
+
+.homedeck-app-tile.featured {
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.18), 0 22px 44px -32px rgba(139, 92, 246, 0.8);
+}
+
+.homedeck-app-tile-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+
+  width: 100%;
+  min-height: 178px;
+  padding: 24px 18px 20px;
+
+  color: var(--hd-text);
+  text-align: center;
+
+  background: transparent;
+  border: 0;
+  border-radius: inherit;
+  cursor: pointer;
+}
+
+.homedeck-app-tile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  width: 100%;
+}
+
+.homedeck-app-tile-info strong {
+  font-size: 0.92rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.homedeck-app-tile-info span {
+  color: var(--hd-muted-2);
+  font-size: 0.76rem;
+}
+
+.homedeck-app-tile-menu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  display: grid;
+  place-items: center;
+
+  width: 32px;
+  height: 32px;
+
+  color: var(--hd-muted-2);
+  font-size: 0.85rem;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 150ms ease, color 150ms ease, background 150ms ease;
+}
+
+.homedeck-app-tile:hover .homedeck-app-tile-menu,
+.homedeck-app-tile:focus-within .homedeck-app-tile-menu {
+  opacity: 1;
+}
+
+.homedeck-app-tile-menu:hover {
+  color: var(--hd-text);
+  background: rgba(148, 163, 184, 0.12);
+}
+
+/* ---------- Empty state ---------- */
+
+.homedeck-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 320px;
+  padding: 48px 24px;
+
+  text-align: center;
+
+  border: 1px dashed var(--hd-border);
+  border-radius: var(--hd-radius-lg);
+  background: rgba(16, 22, 37, 0.4);
+}
+
+.homedeck-empty-icon {
+  display: grid;
+  place-items: center;
+
+  width: 76px;
+  height: 76px;
+  margin-bottom: 20px;
+
+  color: var(--hd-primary);
+  font-size: 2rem;
+
+  border: 1px solid var(--hd-border);
+  border-radius: 22px;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.homedeck-empty-state h2 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.homedeck-empty-state p {
+  margin: 0;
+  max-width: 420px;
+  color: var(--hd-muted);
+  line-height: 1.7;
+}
+
+/* ---------- Configurações ---------- */
+
+.homedeck-settings-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 0 0 6px;
+  font-size: 1.7rem;
+  letter-spacing: -0.03em;
+}
+
+.homedeck-settings-header h1 i {
+  color: var(--hd-primary);
+}
+
+.homedeck-settings-header p {
+  margin: 0;
+  color: var(--hd-muted);
+}
+
+.homedeck-panel {
+  padding: 24px 26px;
+
+  border: 1px solid var(--hd-border);
+  border-radius: var(--hd-radius-lg);
+  background: linear-gradient(150deg, rgba(19, 27, 44, 0.72), rgba(16, 22, 37, 0.6));
+}
+
+.homedeck-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 18px;
+}
+
+.homedeck-panel-header h2 {
+  margin: 0 0 4px;
+  font-size: 1.08rem;
+}
+
+.homedeck-panel-header span {
+  color: var(--hd-muted-2);
+  font-size: 0.82rem;
+}
+
+.homedeck-panel-empty {
+  margin: 0;
+  color: var(--hd-muted-2);
+  font-size: 0.9rem;
+}
+
+.homedeck-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.homedeck-list-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 12px 14px;
+
+  border: 1px solid var(--hd-border);
+  border-radius: var(--hd-radius-md);
+  background: rgba(8, 11, 20, 0.35);
+
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.homedeck-list-item:hover {
+  border-color: var(--hd-border-strong);
+  background: rgba(23, 34, 56, 0.5);
+}
+
+.homedeck-list-icon {
+  display: grid;
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  color: #fff;
+  font-size: 1rem;
+
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.homedeck-list-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+}
+
+.homedeck-list-info strong {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.homedeck-list-info span {
+  color: var(--hd-muted-2);
+  font-size: 0.78rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.homedeck-badge {
+  padding: 2px 9px;
+
+  color: var(--hd-cyan) !important;
+  font-size: 0.65rem !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  border-radius: 999px;
+  background: rgba(6, 182, 212, 0.1);
+}
+
+.homedeck-list-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.homedeck-data-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.homedeck-hidden-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.homedeck-import-error {
+  margin: 14px 0 0;
+  color: #f87171;
+  font-size: 0.85rem;
+}
+
+/* ---------- Formulários ---------- */
+
+.homedeck-form .field {
+  margin: 0;
+}
+
+.homedeck-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--hd-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.homedeck-color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.homedeck-color-swatch {
+  width: 34px;
+  height: 34px;
+
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 140ms ease;
+}
+
+.homedeck-color-swatch:hover {
+  transform: scale(1.1);
+}
+
+.homedeck-color-swatch.selected {
+  border-color: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.16);
+}
+
+.homedeck-icon-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+  gap: 8px;
+}
+
+.homedeck-icon-option {
+  display: grid;
+  place-items: center;
+
+  height: 44px;
+
+  color: var(--hd-muted);
+  font-size: 1.05rem;
+
+  border: 1px solid var(--hd-border);
+  border-radius: var(--hd-radius-sm);
+  background: rgba(8, 11, 20, 0.4);
+
+  cursor: pointer;
+  transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.homedeck-icon-option:hover {
+  color: var(--hd-text);
+  border-color: var(--hd-border-strong);
+}
+
+.homedeck-icon-option.selected {
+  color: #fff;
+  border-color: var(--hd-primary);
+  background: rgba(59, 130, 246, 0.2);
+}
+
+/* ---------- Loading global ---------- */
+
+.homedeck-loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(8, 11, 20, 0.88);
+  backdrop-filter: blur(8px);
+}
+
+.homedeck-loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.homedeck-loading-content>span {
+  color: var(--hd-muted);
+}
+
+/* ---------- Preloader ---------- */
+
+.homedeck-preloader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+
+  min-height: 100vh;
+  padding: 24px;
+
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(59, 130, 246, 0.14), transparent 52%),
+    var(--hd-bg);
+}
+
+.homedeck-preloader-logo {
+  width: min(320px, 72vw);
+  height: auto;
+  object-fit: contain;
+}
+
+.homedeck-preloader-track {
+  overflow: hidden;
+
+  width: min(280px, 70vw);
+  height: 4px;
+
+  border-radius: 999px;
+  background: var(--hd-surface-hover);
+}
+
+.homedeck-preloader-progress {
+  width: 40%;
+  height: 100%;
+
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--hd-primary), var(--hd-secondary), var(--hd-cyan));
+
+  animation: homedeck-loading 1.2s ease-in-out infinite alternate;
+}
+
+.homedeck-preloader-caption {
+  color: var(--hd-muted);
+  font-size: 0.85rem;
+}
+
+@keyframes homedeck-loading {
+  from {
+    transform: translateX(-10%);
+  }
+
+  to {
+    transform: translateX(160%);
+  }
+}
+
+/* ---------- Dialog ---------- */
+
+.homedeck-dialog-description {
+  margin: 0 0 1.5rem;
+  color: var(--hd-muted);
+  line-height: 1.6;
+}
+
+.p-dialog {
+  border: 1px solid var(--hd-border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.95);
+}
+
+.p-dialog .p-dialog-header {
+  background: var(--hd-surface);
+  color: var(--hd-text);
+  padding: 1.4rem 1.6rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.p-dialog .p-dialog-content {
+  background: var(--hd-surface);
+  color: var(--hd-text);
+  padding: 0 1.6rem 1.4rem;
+}
+
+.p-dialog .p-dialog-footer {
+  background: var(--hd-surface);
+  padding: 1rem 1.6rem 1.4rem;
+  border-top: 1px solid var(--hd-border);
+}
+
+.p-dialog .p-inputtext,
+.p-dialog .p-inputtextarea {
+  width: 100%;
+}
+
+/* ---------- Tela grande (TV) ---------- */
+
+@media (min-width: 1700px) {
+  :root {
+    font-size: 17px;
+    --hd-sidebar-width: 290px;
+  }
+}
+
+@media (min-width: 2200px) {
+  :root {
+    font-size: 20px;
+    --hd-sidebar-width: 340px;
+  }
+}
+
+/* ---------- Telas menores ---------- */
+
+@media (max-width: 1100px) {
+  .homedeck-hero-status {
+    position: static;
+    align-self: flex-start;
+    margin-top: 22px;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --hd-sidebar-width: 210px;
+  }
+
+  .homedeck-content {
+    padding: 8px 22px 44px;
+  }
+
+  .homedeck-topbar {
+    padding: 14px 22px;
+  }
+
+  .homedeck-page-header {
+    flex-wrap: wrap;
+  }
+
+  .homedeck-back-link {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .homedeck-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .homedeck-search {
+    max-width: none;
+    width: 100%;
+  }
+
+  .homedeck-add-button {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --hd-sidebar-width: 70px;
+  }
+
+  .homedeck-sidebar {
+    padding: 18px 9px;
+  }
+
+  .homedeck-brand {
+    margin: 0 0 30px;
+    justify-content: center;
+  }
+
+  .homedeck-brand-logo {
+    width: 42px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: left top;
+  }
+
+  .homedeck-nav-item>span,
+  .homedeck-sidebar-footer {
+    display: none;
+  }
+
+  .homedeck-nav-item {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .homedeck-nav-item>i {
+    font-size: 1.3rem;
+  }
+
+  .homedeck-content {
+    padding: 6px 16px 36px;
+  }
+
+  .homedeck-topbar {
+    padding: 12px 16px;
+  }
+
+  .homedeck-topbar-label {
+    display: none;
+  }
+
+  .homedeck-clock strong {
+    font-size: 1.1rem;
+  }
+
+  .homedeck-clock span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
